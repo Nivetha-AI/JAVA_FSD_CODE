@@ -1,0 +1,74 @@
+package com.hex.hiberHQL.com.hex.hiberHQL;
+
+import java.util.Scanner;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+
+
+
+
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	
+	SessionFactory fac;
+	Session ses;
+	Transaction tx;
+
+	App() {
+		fac = new Configuration().configure("hiber.cfg.xml").addAnnotatedClass(Product.class).buildSessionFactory();
+
+		ses = fac.openSession();
+
+	}
+	
+	void insertProduct(int Pid,String name , Double price) {
+		tx = ses.beginTransaction();
+		String hql = "insert into product p values(p.id=:i,p.name=:nm,p.price=:pp)";
+		Query q = ses.createQuery(hql);
+		  q.setParameter("i", Pid);
+		  q.setParameter("nm", name);
+		  q.setParameter("pp", price);  
+		  int result=q.executeUpdate();
+	      tx.commit();
+	      if (result > 0) {
+	          System.out.println("Item added");
+	      } else {
+	          System.out.println("Failed to add item");
+	      }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    public static void main( String[] args )
+    {
+    	Scanner sc=new Scanner(System.in);
+    	App app = new App();
+    	System.out.println("Enter name:");
+    	String name =sc.next();
+    	System.out.println("Enter price");
+    	Double price =sc.nextDouble();
+    	app.insertProduct(name, price);
+        System.out.println( "Hello World!" );
+    }
+}

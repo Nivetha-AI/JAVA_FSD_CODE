@@ -1,0 +1,16 @@
+package com.hex.hiberHQL.com.hex.hiberHQL;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product")
+public class Product {
+	@Id
+	@GeneratedValue
+	int Pid;
+	String name;
+	Double price;
+}

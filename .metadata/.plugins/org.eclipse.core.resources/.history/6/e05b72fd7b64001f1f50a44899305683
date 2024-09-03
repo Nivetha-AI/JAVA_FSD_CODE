@@ -1,0 +1,8 @@
+package Dao;
+
+import Model.Login;
+
+public interface DaoInter {
+	 boolean signUp(Login l);
+	 void SignIn( int userId, int userPass);
+}

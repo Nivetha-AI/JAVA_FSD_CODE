@@ -1,0 +1,5 @@
+package com.hex.hiberemanytoone.com.hex.hiberemanytoone;
+
+public class UserDetails {
+
+}

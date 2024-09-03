@@ -1,0 +1,59 @@
+package com.hex.hiberHQL.com.hex.hiberHQL;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+
+
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	
+	SessionFactory fac;
+	Session ses;
+	Transaction tx;
+
+	App() {
+		fac = new Configuration().configure("hiber.cfg.xml").addAnnotatedClass(Product.class).buildSessionFactory();
+
+		ses = fac.openSession();
+
+	}
+	
+	void insertProduct(String name , Double price) {
+		tx = ses.beginTransaction();
+		String hql = "insert into product p values(p.name=:nm,p.price=:pp)";
+		Query q = ses.createQuery(hql);
+		
+		q.setName("C++");
+		q.setPrice(5000.9);
+
+		ses.save(b);
+		tx.commit();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}

@@ -1,0 +1,145 @@
+package com.hex.hiberHQL.com.hex.hiberHQL;
+
+import java.util.Scanner;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+
+
+
+
+
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	
+	SessionFactory fac;
+	Session ses;
+	Transaction tx;
+
+	App() {
+		fac = new Configuration().configure("hiber.cfg.xml").addAnnotatedClass(Product.class).buildSessionFactory();
+
+		ses = fac.openSession();
+
+	}
+	
+	void insertProduct(int Pid,String name , Double price) {
+		tx = ses.beginTransaction();
+		String hql = "insert into product p values(p.Pid=:i,p.name=:nm,p.price=:pp)";
+		Query q = ses.createQuery(hql,Product.class);
+		  q.setParameter("i", Pid);
+		  q.setParameter("nm", name);
+		  q.setParameter("pp", price);  
+		  int result=q.executeUpdate();
+	      tx.commit();
+	      if (result > 0) {
+	          System.out.println("Item added");
+	      } else {
+	          System.out.println("Failed to add item");
+	      }
+	}
+	
+	
+	void removeHQL(int Pid) {
+		tx = ses.beginTransaction();
+
+		String hql = "delete from Product P where P.Pid=:bn ";
+
+		Query q = ses.createQuery(hql);
+
+		q.setParameter("bn", Pid);
+
+		
+		int result= q.executeUpdate();
+		tx.commit();
+		if (result > 0) {
+	          System.out.println("Item removed");
+	      } else {
+	          System.out.println("Failed to remove item");
+	      }
+		
+
+	}
+	
+	
+	void updateproduct(int Pid , Double Price) {
+		tx = ses.beginTransaction();
+		String hql = "Update Product P set P.price=:nm where P.Pid=:bn";
+		Query q = ses.createQuery(hql);
+		q.setParameter("bn", Pid);
+		q.setParameter("nm", Price);
+		int result= q.executeUpdate();
+		tx.commit();
+		if (result > 0) {
+	          System.out.println("Price Updated");
+	      } else {
+	          System.out.println("Failed to  update price");
+	      }
+		
+
+	}
+	
+	
+	
+	
+	
+	
+	
+    public static void main( String[] args )
+    {
+    	Scanner sc=new Scanner(System.in);
+    	App app = new App();
+    	while(true) {
+			System.out.println("1. To insert");
+			System.out.println("2. To remove");
+			System.out.println("3. To remove Account.");
+			System.out.println("4. To Update Account.");
+			System.out.println("5. To remove Account by HQL.");
+			System.out.println("6. To update Password by HQL.");
+			System.out.println("0. To exit");
+			int ch=sc.nextInt();
+			if(ch==1) {
+//		    	System.out.println("Enter Id:");
+//		    	int id  =sc.nextInt();
+//		    	System.out.println("Enter name:");
+//		    	String name =sc.next();
+//		    	System.out.println("Enter price");
+//		    	Double price =sc.nextDouble();
+//		    	app.insertProduct(id,name, price);
+			}
+			else if(ch==2){
+				System.out.println("Enter Id to remove:");
+		     	int id  =sc.nextInt();
+		    	app.removeHQL(id);
+			}
+			else if(ch==3) {
+				
+			}
+			else if (ch==4) {
+				
+			}
+			else if (ch==5) {
+				
+			}
+			
+			else if(ch==0) {
+				break;
+			}
+			else {
+				continue;
+			}
+		}
+
+    	
+        System.out.println( "Hello World!" );
+    }
+}

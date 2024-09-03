@@ -1,0 +1,6 @@
+package com.hex.hiberembedd.com.hex.hiberembedd;
+
+public class Result {
+ int marks;
+ String sub;
+}

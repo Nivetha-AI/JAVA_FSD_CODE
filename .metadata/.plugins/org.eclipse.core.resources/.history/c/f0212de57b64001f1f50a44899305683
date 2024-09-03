@@ -1,0 +1,59 @@
+package Dao;
+
+import java.util.Scanner;
+
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import Conne.Connt;
+import Model.Login;
+
+public class Dao implements DaoInter {
+
+	Scanner sc,sc1;
+	SessionFactory f;
+	public Dao()
+	{
+		f=Connt.getSessionFact();
+		
+		sc= new Scanner (System.in);
+		sc1= new Scanner (System.in);
+			
+	}
+	public boolean signUp(Login l) {
+		try {
+		Session ses=f.openSession()	;
+		Transaction tx=ses.beginTransaction();
+		ses.save(l);
+		ses.close();
+     return true;
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());	
+			return false;
+			}
+		
+		
+	}
+	public void SignIn( int userId, int userPass) {
+		try {
+		Session ses=f.openSession()	;
+		Transaction tx=ses.beginTransaction();
+		Login l = ses.find(Login.class,userId);
+		if ((l != null) && l.getUserPass().equals(userPass)){
+           
+            System.out.println("Signed in");
+        } else {
+           System.out.println("Incorrect Credianls");
+        }
+		 ses.close();
+		}
+	
+	catch(Exception e) {
+	System.out.println(e.getMessage());	
+	}
+	}
+}

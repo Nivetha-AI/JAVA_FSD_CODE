@@ -1,0 +1,10 @@
+package Model;
+
+import javax.persistence.Entity;
+
+public class Login {
+	@Entity
+   private int userId;
+   private String userPass;
+   private String email;
+}

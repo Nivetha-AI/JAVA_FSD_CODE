@@ -1,0 +1,10 @@
+package Dao;
+
+
+
+public interface DaoInter {
+	 boolean signUp(int userId, String userPass,String email);
+	 boolean SignIn( int userId, String userPass);
+	 boolean delete(int userId);
+	 update(int userId, String newPass);
+}
