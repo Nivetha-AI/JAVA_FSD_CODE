@@ -1,8 +1,0 @@
-package Dao;
-
-
-
-public interface DaoInter {
-	 boolean signUp(int userId, String userPass,String email);
-	 void SignIn( int userId, int userPass);
-}
